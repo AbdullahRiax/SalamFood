@@ -1,0 +1,29 @@
+{
+  "name": "salamfood",
+  "version": "1.0.0",
+  "description": "this salam food from Abullah",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdullahRiax/SalamFood.git"
+  },
+  "keywords": [
+    "foodapp",
+    "salamfood"
+  ],
+  "author": "abdullah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbdullahRiax/SalamFood/issues"
+  },
+  "homepage": "https://github.com/AbdullahRiax/SalamFood#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}

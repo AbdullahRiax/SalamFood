@@ -1,3 +1,69 @@
 #root{
-  color:red
+  /* color:red */
+}
+.logo-div{
+  /* size: 100px; */
+  
+ 
+
+}
+.logo{
+  /* height:70px; */
+  margin-top:4 ;
+  width: 80px;
+}
+.header{
+ 
+  width: 100%;
+  border: 1px; 
+  border-color: black;
+  border-style: solid;
+  display: flex;
+   flex-direction:row;
+   justify-content: space-between;
+
+
+
+
+   
+ 
+}
+.nav-container{
+ 
+ margin-right: 15;
+
+}
+.nav-container>ul{
+
+ list-style: none;
+  display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+}
+.nav-container>ul>li{
+
+ margin-left: 20;
+   
+}
+.res-img{
+  width: 200px;
+}
+.res-cart{
+  outline-style: solid;
+  outline-width: 1;
+  outline-color:black;
+  width: 200;
+  background-color: azure;
+ 
+}
+.res-cart-con{
+
+  /* display: flex;
+  flex-direction: row; */
+}
+.restaurant-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  flex-direction: row;
 }
