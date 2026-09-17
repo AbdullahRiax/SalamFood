@@ -1,27 +1,30 @@
 import { useState, useEffect } from "react";
+import { fetchRestaurantMenu } from "../api";
 
 const useResMenu = (resId) => {
   const [liveData, setLiveData] = useState(null);
   const [cusineData, setCusineData] = useState(null);
 
-  const fetchData = async () => {
-    const response = await fetch(
-      "https://namastedev.com/api/v1/listRestaurantMenu/" + resId
-    );
-
-    const data = await response.json();
-
-    setLiveData(
-      data?.data?.cards?.[2]?.card?.card?.info
-    );
-
-    setCusineData(
-      data?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-    );
-  };
-
   useEffect(() => {
-    fetchData();
+    let isMounted = true;
+
+    const loadMenu = async () => {
+      setLiveData(null);
+      setCusineData(null);
+      const [info, cuisines] = await fetchRestaurantMenu(resId);
+      if (isMounted) {
+        setLiveData(info);
+        setCusineData(cuisines);
+      }
+    };
+
+    if (resId) {
+      loadMenu();
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [resId]);
 
   return [liveData, cusineData];

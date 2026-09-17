@@ -3,6 +3,7 @@ import RestaurentCard from "./RestaurentCard";
 import Search from "./Search";
 import PopularRestaurant from "./PopularRestaurant";
 import { RestaurantListShimmer } from "./Shimmer";
+import { fetchRestaurants } from "../Utils/api";
 
 const RestaurantCardPopular = PopularRestaurant(RestaurentCard);
 
@@ -12,18 +13,11 @@ const Body = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchData = async () => {
+  const loadRestaurants = async () => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch(
-        "https://namastedev.com/api/v1/listRestaurants"
-      );
-      const data = await response.json();
-      const restaurantList =
-        data?.data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants || [];
-
+      const restaurantList = await fetchRestaurants();
       setLiveData(restaurantList);
       setFilterData(restaurantList);
     } catch (fetchError) {
@@ -35,7 +29,7 @@ const Body = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    loadRestaurants();
   }, []);
 
   return (
