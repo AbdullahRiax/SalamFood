@@ -68,7 +68,19 @@ const OrderSuccess = () => {
         <p className="mt-4 text-sm font-semibold text-orange-700">
           Order ID: {order.id}
         </p>
-        {!isCancelled && <p className="mt-1 text-sm text-stone-600">ETA {order.eta}</p>}
+        {!isCancelled && (
+          <p className="mt-1 text-sm text-stone-600">ETA {order.eta}</p>
+        )}
+        {!isCancelled && !showConfirm && (
+          <div className="mt-6 flex justify-center">
+            <Button
+              title="Cancel order"
+              onClick={() => setShowConfirm(true)}
+              className="min-h-12 w-full max-w-xs bg-white ring-1 ring-red-300 hover:bg-red-50"
+              textClassName="text-red-700"
+            />
+          </div>
+        )}
       </section>
 
       <section className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -127,26 +139,18 @@ const OrderSuccess = () => {
         </div>
       )}
 
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <Link
           to="/"
-          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-xl bg-orange-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-700"
+          className="inline-flex min-h-12 min-w-[140px] flex-1 items-center justify-center rounded-xl bg-orange-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-700"
         >
           Back to home
         </Link>
-        {!isCancelled && !showConfirm && (
-          <Button
-            title="Cancel order"
-            onClick={() => setShowConfirm(true)}
-            className="min-h-12 w-full bg-white ring-1 ring-red-200 hover:bg-red-50 sm:flex-1"
-            textClassName="text-red-700"
-          />
-        )}
         <Link
           to="/Cart"
-          className="inline-flex min-h-12 flex-1 items-center justify-center rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-stone-700 ring-1 ring-stone-200 hover:bg-stone-50"
+          className="inline-flex min-h-12 min-w-[140px] flex-1 items-center justify-center rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-stone-700 ring-1 ring-stone-200 hover:bg-stone-50"
         >
-          {isCancelled ? "View cart" : "View cart"}
+          View cart
         </Link>
       </div>
     </div>
