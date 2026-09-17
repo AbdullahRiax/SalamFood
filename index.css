@@ -21,6 +21,12 @@
   body {
     @apply min-h-screen bg-stone-50 font-sans text-stone-800 antialiased;
   }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) {
+    min-height: 3rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
 }
 
 @layer utilities {

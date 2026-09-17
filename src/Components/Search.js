@@ -26,7 +26,8 @@ const Search = ({ resdata, setLiveData }) => {
   return (
     <div className="mb-8 flex flex-col gap-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-stone-100 sm:flex-row sm:items-center">
       <input
-        className="h-11 w-full flex-1 rounded-xl border border-stone-200 bg-stone-50 px-4 text-sm outline-none transition focus:border-orange-400 focus:bg-white focus:ring-2 focus:ring-orange-100"
+        type="search"
+        className="box-border min-h-12 w-full shrink-0 appearance-none rounded-xl border border-stone-200 bg-stone-50 px-4 py-3 text-base leading-normal outline-none transition focus:border-orange-400 focus:bg-white focus:ring-2 focus:ring-orange-100"
         placeholder="Search restaurants"
         value={value}
         onChange={(e) => setValue(e.target.value)}
