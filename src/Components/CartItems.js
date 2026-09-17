@@ -3,9 +3,11 @@ import { ResImg } from "../Utils/configData";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../Utils/CartSlice";
 
-const CartItems = ({ items, readOnly = false }) => {
+const CartItems = ({ items }) => {
   const dispatch = useDispatch();
-
+  function removebtnfun(item) {
+    dispatch(removeFromCart(item));
+  }
   if (!items || items.length === 0) {
     return (
       <div className="py-12 text-center">
@@ -46,14 +48,12 @@ const CartItems = ({ items, readOnly = false }) => {
                   alt={info?.name}
                 />
               )}
-              {!readOnly && (
-                <Button
-                  title="Remove"
-                  onClick={() => dispatch(removeFromCart())}
-                  className="bg-white ring-1 ring-stone-200 hover:bg-stone-50"
-                  textClassName="text-stone-700"
-                />
-              )}
+              <Button
+                title="Remove"
+                onClick={() => removebtnfun(item)}
+                className="bg-white ring-1 ring-stone-200 hover:bg-stone-50"
+                textClassName="text-stone-700"
+              />
             </div>
           </div>
         );

@@ -28,3 +28,5 @@ npm run build
 ```
 
 The app deploys to GitHub Pages from the `main` branch via GitHub Actions.
+
+Full step-by-step guide: [DEPLOY.md](./DEPLOY.md)
