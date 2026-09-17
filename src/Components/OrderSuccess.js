@@ -49,7 +49,7 @@ const OrderSuccess = () => {
         </p>
       </div>
 
-      <section className="rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-stone-100 sm:p-8">
+      <section className="relative overflow-hidden rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-stone-100 sm:p-8">
         <div
           className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full text-2xl ${
             isCancelled ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700"
@@ -71,7 +71,7 @@ const OrderSuccess = () => {
         {!isCancelled && (
           <p className="mt-1 text-sm text-stone-600">ETA {order.eta}</p>
         )}
-        {!isCancelled && !showConfirm && (
+        {!isCancelled && (
           <div className="mt-6 flex justify-center">
             <Button
               title="Cancel order"
@@ -79,6 +79,33 @@ const OrderSuccess = () => {
               className="min-h-12 w-full max-w-xs bg-white ring-1 ring-red-300 hover:bg-red-50"
               textClassName="text-red-700"
             />
+          </div>
+        )}
+
+        {showConfirm && !isCancelled && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/95 p-4 sm:p-8">
+            <div className="w-full max-w-sm rounded-2xl bg-red-50 p-4 text-left ring-1 ring-red-100 sm:p-5">
+              <h3 className="text-center font-semibold text-red-800 sm:text-lg">
+                Cancel this order?
+              </h3>
+              <p className="mt-2 text-center text-sm text-red-700">
+                This is a dummy cancel. Your items will go back to the cart.
+              </p>
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                <Button
+                  title="Keep order"
+                  onClick={() => setShowConfirm(false)}
+                  className="min-h-12 w-full bg-white ring-1 ring-stone-200 hover:bg-stone-50 sm:flex-1"
+                  textClassName="text-stone-700"
+                />
+                <Button
+                  title="Yes, cancel order"
+                  onClick={handleCancel}
+                  className="min-h-12 w-full bg-red-600 hover:bg-red-700 sm:flex-1"
+                  textClassName="text-white"
+                />
+              </div>
+            </div>
           </div>
         )}
       </section>
@@ -115,29 +142,6 @@ const OrderSuccess = () => {
         <h2 className="font-bold text-stone-900">Items</h2>
         <CartItems items={order.items} readOnly />
       </section>
-
-      {!isCancelled && showConfirm && (
-        <div className="mt-6 rounded-2xl bg-red-50 p-4 ring-1 ring-red-100 sm:p-5">
-          <h3 className="font-semibold text-red-800">Cancel this order?</h3>
-          <p className="mt-1 text-sm text-red-700">
-            This is a dummy cancel. Your items will go back to the cart.
-          </p>
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-            <Button
-              title="Keep order"
-              onClick={() => setShowConfirm(false)}
-              className="min-h-12 w-full bg-white ring-1 ring-stone-200 hover:bg-stone-50 sm:flex-1"
-              textClassName="text-stone-700"
-            />
-            <Button
-              title="Yes, cancel order"
-              onClick={handleCancel}
-              className="min-h-12 w-full bg-red-600 hover:bg-red-700 sm:flex-1"
-              textClassName="text-white"
-            />
-          </div>
-        </div>
-      )}
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <Link
