@@ -3,7 +3,7 @@ import { ResImg } from "../Utils/configData";
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../Utils/CartSlice";
 
-const CartItems = ({ items }) => {
+const CartItems = ({ items, readOnly = false }) => {
   const dispatch = useDispatch();
   function removebtnfun(item) {
     dispatch(removeFromCart(item));
@@ -48,12 +48,14 @@ const CartItems = ({ items }) => {
                   alt={info?.name}
                 />
               )}
-              <Button
-                title="Remove"
-                onClick={() => removebtnfun(item)}
-                className="bg-white ring-1 ring-stone-200 hover:bg-stone-50"
-                textClassName="text-stone-700"
-              />
+              {!readOnly && (
+                <Button
+                  title="Remove"
+                  onClick={() => removebtnfun(item)}
+                  className="bg-white ring-1 ring-stone-200 hover:bg-stone-50"
+                  textClassName="text-stone-700"
+                />
+              )}
             </div>
           </div>
         );

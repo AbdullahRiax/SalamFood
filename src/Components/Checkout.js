@@ -59,6 +59,7 @@ const Checkout = () => {
       },
       payment: form.payment === "cod" ? "Cash on delivery" : "Card (dummy)",
       eta: "30-40 mins",
+      status: "placed",
     };
 
     window.setTimeout(() => {

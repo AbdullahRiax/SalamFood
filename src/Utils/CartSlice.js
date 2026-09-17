@@ -21,6 +21,10 @@ const CartSlice = createSlice({
     clearCart: (state) => {
       state.items = [];
     },
+
+    restoreCart: (state, action) => {
+      state.items = action.payload || [];
+    },
   },
 });
 
@@ -28,6 +32,7 @@ export const {
   addToCart,
   removeFromCart,
   clearCart,
+  restoreCart,
 } = CartSlice.actions;
 
 export default CartSlice.reducer;
