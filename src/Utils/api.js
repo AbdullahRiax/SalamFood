@@ -6,6 +6,7 @@ import {
 
 const LIST_URL = "https://namastedev.com/api/v1/listRestaurants";
 const MENU_URL = "https://namastedev.com/api/v1/listRestaurantMenu/";
+const corsUrl = (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`;
 
 const parseRestaurants = (data) =>
   data?.data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
@@ -16,12 +17,12 @@ const parseMenu = (data) => [
   data?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || null,
 ];
 
-async function fetchJson(url, timeoutMs = 8000) {
+async function fetchJson(url, timeoutMs = 12000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const response = await fetch(url, { signal: controller.signal });
+    const response = await fetch(corsUrl(url), { signal: controller.signal });
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
@@ -31,17 +32,9 @@ async function fetchJson(url, timeoutMs = 8000) {
   }
 }
 
-async function fetchJsonWithCors(url) {
-  try {
-    return await fetchJson(url);
-  } catch {
-    return await fetchJson(`https://corsproxy.io/?${encodeURIComponent(url)}`);
-  }
-}
-
 export async function fetchRestaurants() {
   try {
-    const data = await fetchJsonWithCors(LIST_URL);
+    const data = await fetchJson(LIST_URL);
     const restaurants = parseRestaurants(data);
     if (!restaurants.length) {
       throw new Error("Empty restaurant list");
@@ -54,7 +47,7 @@ export async function fetchRestaurants() {
 
 export async function fetchRestaurantMenu(resId) {
   try {
-    const data = await fetchJsonWithCors(MENU_URL + resId);
+    const data = await fetchJson(MENU_URL + resId);
     const [info, cuisines] = parseMenu(data);
     if (!info) {
       throw new Error("Empty menu");
