@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "./Button";
@@ -12,6 +12,10 @@ const OrderSuccess = () => {
   const [showConfirm, setShowConfirm] = useState(false);
 
   const isCancelled = order?.status === "cancelled";
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handleCancel = () => {
     dispatch(restoreCart(order.items));

@@ -44,19 +44,19 @@ describe("Header", () => {
     expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "About us" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Contact us" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Cart/ })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Cart/ }).length).toBeGreaterThan(0);
   });
 
   test("shows 0 items when the cart is empty", () => {
     renderHeader();
 
-    expect(screen.getByText("0")).toBeInTheDocument();
+    expect(screen.getAllByText("0").length).toBeGreaterThan(0);
   });
 
   test("shows the cart item count from the store", () => {
     renderHeader([{ id: 1 }, { id: 2 }]);
 
-    expect(screen.getByText("2")).toBeInTheDocument();
+    expect(screen.getAllByText("2").length).toBeGreaterThan(0);
   });
 
   test("renders the sale name from context", () => {
@@ -71,6 +71,7 @@ describe("Header", () => {
 
     await user.click(screen.getByRole("button", { name: "Toggle navigation" }));
 
-    expect(screen.getByRole("link", { name: /Cart \(0\)/ })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Home" }).length).toBeGreaterThan(1);
+    expect(screen.getAllByRole("link", { name: /Cart/ }).length).toBeGreaterThan(1);
   });
 });

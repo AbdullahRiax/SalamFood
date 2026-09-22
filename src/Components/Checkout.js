@@ -43,6 +43,15 @@ const Checkout = () => {
     event.preventDefault();
     if (items.length === 0 || isPlacing) return;
 
+    const formEl = event.currentTarget;
+    if (!formEl.checkValidity()) {
+      const firstInvalid = formEl.querySelector(":invalid");
+      firstInvalid?.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstInvalid?.focus({ preventScroll: true });
+      window.setTimeout(() => firstInvalid?.reportValidity(), 280);
+      return;
+    }
+
     setIsPlacing(true);
 
     const order = {
@@ -88,6 +97,7 @@ const Checkout = () => {
       </div>
 
       <form
+        noValidate
         onSubmit={handlePlaceOrder}
         className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"
       >

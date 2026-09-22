@@ -56,14 +56,29 @@ const Header = () => {
           </NavLink>
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-stone-200 text-stone-700 md:hidden"
-          onClick={() => setIsMenuOpen((open) => !open)}
-          aria-label="Toggle navigation"
-        >
-          <span className="text-xl">{isMenuOpen ? "✕" : "☰"}</span>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <NavLink
+            to="/Cart"
+            onClick={closeMenu}
+            aria-label={`Cart (${items.length})`}
+            className={({ isActive }) =>
+              `${navLinkClass({ isActive })} relative inline-flex h-10 items-center`
+            }
+          >
+            Cart
+            <span className="ml-1.5 inline-flex min-w-5 items-center justify-center rounded-full bg-orange-600 px-1.5 text-xs font-bold text-white">
+              {items.length}
+            </span>
+          </NavLink>
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-stone-200 text-stone-700"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            aria-label="Toggle navigation"
+          >
+            <span className="text-xl">{isMenuOpen ? "✕" : "☰"}</span>
+          </button>
+        </div>
       </div>
 
       {isMenuOpen && (
@@ -82,7 +97,7 @@ const Header = () => {
               Contact us
             </NavLink>
             <NavLink to="/Cart" className={navLinkClass} onClick={closeMenu}>
-              Cart ({items.length})
+              Cart
             </NavLink>
           </div>
         </nav>
